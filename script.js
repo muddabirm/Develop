@@ -8,22 +8,24 @@ $(document).ready(function(){
   $("#currentDay").html(currentDate);
 
   $(function () {
+    //onclick button listener
   $("button").on("click",function(){
     let textArea = $("textarea");
     localStorage.setItem("item", textArea.val());
   })
-  let time = dayjs().format('hA')
-  let timeShown = $("timeText").text();
+  let time = dayjs().format('H').toString(); // grabs current time in 24/hr
+  let timeShown = parseInt($("timeText").text());// parseInt used to remove the AM/PM from the string and turn the time into a number.
   console.log(time);
-  console.log(timeShown)
+  console.log(timeShown);
   if (time === timeShown){
     console.log("time is equal")
-    $("timeBlock").css(".present");
+    $("timeBlock").removeClass("past future").addClass("present");
   }else if (time > timeShown){
     console.log("time is greater");
-    $("timeBlock").removeClass("future");
+    $("timeBlock").removeClass("future present").addClass("past");
   }else if(time < timeShown){
-    $("timeBlock").removeClass("future");
+    console.log("time is less")
+    $("timeBlock").removeClass("past present").addClass("future");
   }
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
