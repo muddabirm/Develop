@@ -3,19 +3,27 @@
 // in the html.
 $(document).ready(function(){
   //for currenrt date
-  const currentDate = dayjs().format('dddd, MMMM D').toString()
-  console.log(currentDate)
-  $("#currentDay").html(currentDate)
+  const currentDate = dayjs().format('dddd, MMMM D').toString();
+  console.log(currentDate);
+  $("#currentDay").html(currentDate);
 
   $(function () {
   $("button").on("click",function(){
-    let textArea = $("textarea")
-    localStorage.setItem("item", textArea.val())
+    let textArea = $("textarea");
+    localStorage.setItem("item", textArea.val());
   })
-  const time = dayjs().format('hA')
-  console.log(time)
-  if (time = $("")){
-    $()
+  let time = dayjs().format('hA')
+  let timeShown = $("timeText").text();
+  console.log(time);
+  console.log(timeShown)
+  if (time === timeShown){
+    console.log("time is equal")
+    $("timeBlock").css(".present");
+  }else if (time > timeShown){
+    console.log("time is greater");
+    $("timeBlock").removeClass("future");
+  }else if(time < timeShown){
+    $("timeBlock").removeClass("future");
   }
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
