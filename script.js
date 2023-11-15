@@ -10,23 +10,43 @@ $(document).ready(function(){
   $(function () {
     //onclick button listener
   $("button").on("click",function(){
-    let textArea = $("textarea");
-    localStorage.setItem("item", textArea.val());
+    var valueOne = $("#1").val() 
+    var valueTwo = $("#2").val() 
+    var valueThree = $("#3").val() 
+    var valueFour = $("#4").val() 
+    var valueFive = $("#5").val() 
+    var valueSix = $("#6").val() 
+    var valueSeven = $("#7").val() 
+    var valueEight = $("#8").val() 
+    var valueNine = $("#9").val() 
+    localStorage.setItem("itemOne", valueOne);
+    localStorage.setItem("itemTwo", valueTwo);
+    localStorage.setItem("itemThree", valueThree);
+    localStorage.setItem("itemFour", valueFour);
+    localStorage.setItem("itemFive", valueFive);
+    localStorage.setItem("itemSix", valueSix);
+    localStorage.setItem("itemSeven", valueSeven);
+    localStorage.setItem("itemEight", valueEight);
+    localStorage.setItem("itemNine", valueNine);
   })
-  let time = dayjs().format('H').toString(); // grabs current time in 24/hr
-  let timeShown = parseInt($("timeText").text());// parseInt used to remove the AM/PM from the string and turn the time into a number.
-  console.log(time);
+  $("timeBlock").each(function(){ //loops through each timeBlock div
+  let time = dayjs().format('H').toString(); // grabs current time in 12/hr'
+  let fakeTime = 3 // used for testing
+  let timeShown = parseInt($(this).text());// parseInt used to remove the AM/PM from the string and turn the time into a number.
   console.log(timeShown);
-  if (time === timeShown){
+  console.log(time);
+  if(time)
+  if (time == timeShown ){
     console.log("time is equal")
-    $("timeBlock").removeClass("past future").addClass("present");
+    $(this).removeClass("future past").addClass("present");
   }else if (time > timeShown){
     console.log("time is greater");
-    $("timeBlock").removeClass("future present").addClass("past");
-  }else if(time < timeShown){
+    $(this).removeClass("future present").addClass("past");
+  }else if(time < timeShown) {
     console.log("time is less")
-    $("timeBlock").removeClass("past present").addClass("future");
-  }
+    $(this).removeClass("present past").addClass("future");
+
+  }})
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
